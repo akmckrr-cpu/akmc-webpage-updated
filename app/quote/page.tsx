@@ -46,7 +46,7 @@ function QuoteForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!name || !phone || !city || items.length === 0) {
       toast.error("Please fill in all required fields");
       return;
@@ -76,7 +76,7 @@ function QuoteForm() {
       .filter(i => i.productName)
       .map((i, idx) => `${idx + 1}. ${i.productName}${i.variant ? ` (${i.variant})` : ""} - ${i.quantity} ${i.unit}`)
       .join("\n");
-    
+
     return `Hi AKMC,\n\nI need a quote for the following items:\n\nName: ${name}\nCompany: ${company || "N/A"}\nCity: ${city}\nPhone: ${phone}\n\nItems:\n${itemList || "Please contact me with your catalog."}\n\n${message ? `Additional Notes: ${message}` : ""}`;
   };
 

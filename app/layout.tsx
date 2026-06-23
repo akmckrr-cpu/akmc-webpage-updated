@@ -11,7 +11,7 @@ import { generateLocalBusinessSchema } from "@/lib/seo-utils";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ||"http://localhost:3000"),
+  metadataBase: new URL("https://akmc.in"),
   title: {
     default: "A Karur Metal Co. | Bus Body Building Materials Supplier",
     template: "%s | A Karur Metal Co.",
