@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 export default function VehiclePlywoodPage() {
-  const brands = [...new Set(vehiclePlywoodItems.map(v => v.vehicleBrand))];
+  const brands: string[] = Array.from(new Set(vehiclePlywoodItems.map(v => v.vehicleBrand)));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
