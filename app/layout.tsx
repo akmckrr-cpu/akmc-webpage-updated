@@ -11,7 +11,6 @@ import { generateLocalBusinessSchema } from "@/lib/seo-utils";
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://akmc.in"),
   title: {
     default: "A Karur Metal Co. | Bus Body Building Materials Supplier",
     template: "%s | A Karur Metal Co.",
@@ -35,7 +34,6 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     siteName: "A Karur Metal Co.",
-    images: ["/images/og-image.jpg"],
   },
   twitter: {
     card: "summary_large_image",
@@ -74,7 +72,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-sans antialiased bg-metal-50 text-metal-900">
+      <body className={`${inter.className} font-sans antialiased bg-metal-50 text-metal-900`}>
         <Navbar />
         <main>{children}</main>
         <Footer />
