@@ -2,7 +2,7 @@
 /* All 5 themes apply to every page. User selects via switcher. */
 
 /* ============================================ */
-/* BASE VARIABLES (fallback)                    */
+/* BASE VARIABLES (fallback) */
 /* ============================================ */
 :root {
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -11,8 +11,8 @@
 }
 
 /* ============================================ */
-/* THEME 1: ARCHITECTURAL MINIMAL              */
-/* Stark Studio Vibe — White + Midnight Blue   */
+/* THEME 1: ARCHITECTURAL MINIMAL */
+/* Stark Studio Vibe — White + Midnight Blue */
 /* ============================================ */
 .theme-architectural-minimal {
   --bg: #FFFFFF;
@@ -58,7 +58,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-  padding: 14px 32px;
+  padding: 18px 40px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -75,9 +75,9 @@
   background: transparent;
   color: var(--text);
   border: 1px solid var(--text);
-  padding: 14px 32px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 10px 22px;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -121,7 +121,7 @@
 }
 
 /* ============================================ */
-/* THEME 2: QUIET LUXURY                         */
+/* THEME 2: QUIET LUXURY */
 /* Premium Editorial — Warm Alabaster + Champagne*/
 /* ============================================ */
 .theme-quiet-luxury {
@@ -168,7 +168,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-  padding: 14px 32px;
+  padding: 18px 40px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -185,9 +185,9 @@
   background: transparent;
   color: var(--text);
   border: 1px solid var(--text);
-  padding: 14px 32px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 10px 22px;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -231,8 +231,8 @@
 }
 
 /* ============================================ */
-/* THEME 3: TECH BRUTALIST                       */
-/* Engineering Core — Deep Cyber Slate           */
+/* THEME 3: TECH BRUTALIST */
+/* Engineering Core — Deep Cyber Slate */
 /* ============================================ */
 .theme-tech-brutalist {
   --bg: #0B0F19;
@@ -280,7 +280,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-  padding: 14px 32px;
+  padding: 18px 40px;
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
@@ -297,8 +297,8 @@
   background: transparent;
   color: var(--text);
   border: 1px solid var(--text);
-  padding: 14px 32px;
-  font-size: 12px;
+  padding: 10px 22px;
+  font-size: 11px;
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -343,8 +343,8 @@
 }
 
 /* ============================================ */
-/* THEME 4: CORPORATE ELITE                      */
-/* Institutional Trust — Ice Clean Corporate     */
+/* THEME 4: CORPORATE ELITE */
+/* Institutional Trust — Ice Clean Corporate */
 /* ============================================ */
 .theme-corporate-elite {
   --bg: #F4F6F9;
@@ -390,7 +390,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-  padding: 14px 32px;
+  padding: 18px 40px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -407,9 +407,9 @@
   background: transparent;
   color: var(--text);
   border: 1px solid var(--text);
-  padding: 14px 32px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 10px 22px;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -453,8 +453,8 @@
 }
 
 /* ============================================ */
-/* THEME 5: RAW ECO                              */
-/* Sustainability Matrix — Organic Materials     */
+/* THEME 5: RAW ECO */
+/* Sustainability Matrix — Organic Materials */
 /* ============================================ */
 .theme-raw-eco {
   --bg: #F9F9F6;
@@ -500,7 +500,7 @@
   background: var(--btn-bg);
   color: var(--btn-text);
   border: 1px solid var(--btn-bg);
-  padding: 14px 32px;
+  padding: 18px 40px;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -517,9 +517,9 @@
   background: transparent;
   color: var(--text);
   border: 1px solid var(--text);
-  padding: 14px 32px;
-  font-size: 13px;
-  font-weight: 600;
+  padding: 10px 22px;
+  font-size: 11px;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -563,7 +563,7 @@
 }
 
 /* ============================================ */
-/* SHARED UTILITIES (all themes)                 */
+/* SHARED UTILITIES (all themes) */
 /* ============================================ */
 .section-padding {
   padding: 120px 64px;

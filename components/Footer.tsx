@@ -4,46 +4,148 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="px-6 py-12 transition-colors duration-300">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid md:grid-cols-4 gap-8 mb-8 pb-8" style={{ borderBottom: "1px solid var(--border)" }}>
-          <div>
-            <div className="text-sm font-bold tracking-widest uppercase mb-4" style={{ color: "var(--text)" }}>AKMC Systems</div>
-            <p className="text-sm leading-relaxed font-light" style={{ color: "var(--text-muted)", maxWidth: "280px" }}>
-              Strategic transport material logistics networks supplying South India's premier manufacturing zones.
-            </p>
+    <footer
+      style={{
+        borderTop: "1px solid var(--border)",
+        padding: "80px 64px 40px 64px",
+        maxWidth: "1400px",
+        margin: "0 auto",
+        transition: "border 0.5s",
+      }}
+    >
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1.5fr repeat(3, 1fr)",
+          gap: "40px",
+          marginBottom: "60px",
+        }}
+        className="footer-grid-responsive"
+      >
+        <div>
+          <div
+            style={{
+              fontSize: "16px",
+              fontWeight: 700,
+              letterSpacing: "0.15em",
+              marginBottom: "16px",
+              textTransform: "uppercase",
+              color: "var(--text)",
+            }}
+          >
+            AKMC Systems
           </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>Systems Matrix</div>
-            <div className="space-y-2 text-sm">
-              <div><Link href="/products/aluminium-extrusion" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Extrusions Matrix</Link></div>
-              <div><Link href="/products/acp-sheet" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>ACM Skin Panels</Link></div>
-              <div><Link href="/products/bus-body-materials" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Bus Body Materials</Link></div>
-              <div><Link href="/products/vehicle-plywood" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>LCV Decking Plates</Link></div>
-            </div>
-          </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>Logistics Infrastructure</div>
-            <div className="space-y-2 text-sm">
-              <div><Link href="/karur/aluminium-extrusion" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Karur Core Hub</Link></div>
-              <div><Link href="/coimbatore/acp-sheet" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Coimbatore Corridors</Link></div>
-              <div><Link href="/salem/chequered-plywood" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Salem Logistics</Link></div>
-              <div><Link href="/kerala/aluminium-extrusion" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Kerala Logistics Matrices</Link></div>
-            </div>
-          </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>Technical Corporate</div>
-            <div className="space-y-2 text-sm">
-              <div><Link href="/about" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Quality Protocols</Link></div>
-              <div><Link href="/about" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>AIS-052 Data Specs</Link></div>
-              <div><Link href="/quote" className="hover:opacity-100 transition-opacity font-light" style={{ color: "var(--text-muted)" }}>Get Quote</Link></div>
-            </div>
-          </div>
+          <p
+            style={{
+              fontSize: "13px",
+              color: "var(--text-muted)",
+              lineHeight: 1.6,
+              maxWidth: "280px",
+              fontWeight: 300,
+            }}
+          >
+            Strategic transport material logistics networks supplying South India&apos;s premier manufacturing zones.
+          </p>
         </div>
-        <div className="text-center text-xs font-mono pt-4" style={{ color: "var(--text-muted)" }}>
-          &copy; 2026 A KARUR METAL CO. TECHNICAL VEHICLE SUPPLY OPERATIONS. ALL RIGHTS RESERVED.
+        <div>
+          <h4
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              marginBottom: "24px",
+              color: "var(--text)",
+            }}
+          >
+            Systems Matrix
+          </h4>
+          <ul style={{ listStyle: "none" }}>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/products" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>Extrusions Matrix</Link>
+            </li>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/products" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>ACM Skin Panels</Link>
+            </li>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/vehicle-plywood" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>LCV Decking Plates</Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              marginBottom: "24px",
+              color: "var(--text)",
+            }}
+          >
+            Logistics Infrastructure
+          </h4>
+          <ul style={{ listStyle: "none" }}>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/karur/aluminium-extrusion" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>Karur Core Hub</Link>
+            </li>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/coimbatore/aluminium-extrusion" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>Coimbatore Corridors</Link>
+            </li>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/kerala/aluminium-extrusion" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>Kerala Logistics Matrices</Link>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4
+            style={{
+              fontSize: "11px",
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              marginBottom: "24px",
+              color: "var(--text)",
+            }}
+          >
+            Technical Corporate
+          </h4>
+          <ul style={{ listStyle: "none" }}>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/quote" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>Quality Protocols</Link>
+            </li>
+            <li style={{ marginBottom: "12px" }}>
+              <Link href="/quote" style={{ color: "var(--text-muted)", textDecoration: "none", fontSize: "13px", fontWeight: 300, transition: "color 0.2s" }}>AIS-052 Data Specs</Link>
+            </li>
+          </ul>
         </div>
       </div>
+      <div
+        style={{
+          fontSize: "11px",
+          fontFamily: "monospace",
+          color: "var(--text-muted)",
+          textAlign: "center",
+          borderTop: "1px solid var(--border)",
+          paddingTop: "40px",
+          transition: "border 0.5s",
+        }}
+      >
+        &copy; 2026 A KARUR METAL CO. TECHNICAL VEHICLE SUPPLY OPERATIONS. ALL RIGHTS RESERVED.
+      </div>
+
+      <style jsx>{`
+        @media (max-width: 992px) {
+          .footer-grid-responsive {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+        @media (max-width: 640px) {
+          .footer-grid-responsive {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }

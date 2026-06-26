@@ -60,8 +60,8 @@ export interface VehiclePlywoodItem {
   image: string;
   thickness: string;
   size: string;
-  material: string;    // ← ADDED
-  finish: string;        // ← ADDED
+  material: string;
+  finish: string;
   description: string;
   features: string[];
   seoTitle: string;
