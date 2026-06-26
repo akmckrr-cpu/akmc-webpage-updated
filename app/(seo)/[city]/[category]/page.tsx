@@ -2,8 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getLocationPage, getAllLocationPagePaths } from "@/lib/data/seoPages";
-import { getCityBySlug } from "@/lib/data/cities";
-import { getCategoryBySlug } from "@/lib/data/categories";
 import { generateLocationPageSchema, generateBreadcrumbSchema, generateWhatsAppLink } from "@/lib/seo-utils";
 import Script from "next/script";
 import { MapPin, Phone, MessageCircle, ChevronRight, Truck, CheckCircle2 } from "lucide-react";
@@ -72,7 +70,7 @@ export default async function LocationCategoryPage({ params }: { params: Promise
                 {page.categoryDisplay} in <strong className="font-semibold">{page.city}</strong>
               </h1>
               <p className="text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
-                {page.introText}
+                {page.description}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/quote" className="btn-primary">
@@ -123,17 +121,20 @@ export default async function LocationCategoryPage({ params }: { params: Promise
         </div>
       </section>
 
-      {/* Content Section */}
+      {/* Products for this location */}
       <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2">
               <h2 className="text-3xl font-light tracking-tight mb-8" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-                {page.categoryDisplay} Supply in <strong className="font-semibold">{page.city}</strong>
+                Available <strong className="font-semibold">{page.categoryDisplay}</strong> in {page.city}
               </h2>
-              <div className="prose prose-lg max-w-none" style={{ color: "var(--text-muted)" }}>
-                {page.content.split('\n').map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 font-light leading-relaxed">{paragraph}</p>
+              <div className="space-y-4">
+                {page.products.map((product, idx) => (
+                  <div key={idx} className="card p-6 flex items-center gap-4">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                    <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{product}</span>
+                  </div>
                 ))}
               </div>
             </div>
@@ -156,6 +157,19 @@ export default async function LocationCategoryPage({ params }: { params: Promise
                     Call / WhatsApp
                   </Link>
                 </div>
+
+                {page.nearbyAreas.length > 0 && (
+                  <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+                    <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
+                      Nearby Areas
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {page.nearbyAreas.map((area) => (
+                        <span key={area} className="tag">{area}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
