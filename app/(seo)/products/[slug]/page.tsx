@@ -5,7 +5,7 @@ import { getProductBySlug, getAllProductSlugs } from "@/lib/data/products";
 import { getCategoryBySlug } from "@/lib/data/categories";
 import { generateProductSchema, generateFAQSchema, generateBreadcrumbSchema, generateWhatsAppLink } from "@/lib/seo-utils";
 import Script from "next/script";
-import { ShoppingCart, MessageCircle, ChevronRight, CheckCircle2, Ruler } from "lucide-react";
+import { ShoppingCart, MessageCircle, ChevronRight, Ruler } from "lucide-react";
 
 export async function generateStaticParams() {
   return getAllProductSlugs().map((slug) => ({ slug }));
@@ -87,7 +87,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {product.description}
               </p>
 
-              {/* Specs - using product.specs (not specifications) */}
               {product.specs && Object.keys(product.specs).length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
@@ -108,7 +107,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
               )}
 
-              {/* Variants */}
               {product.variants && product.variants.length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
@@ -153,7 +151,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* FAQs */}
       {product.faqs && product.faqs.length > 0 && (
         <section className="akmc-section" style={{ borderTop: "1px solid var(--border)", background: "var(--bg-alt)" }}>
           <div className="max-w-3xl mx-auto">

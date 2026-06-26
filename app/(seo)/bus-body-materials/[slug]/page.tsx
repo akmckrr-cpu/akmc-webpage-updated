@@ -4,7 +4,7 @@ import Link from "next/link";
 import { busBodyMaterials, getBusBodyMaterialBySlug, getAllBusBodyMaterialSlugs } from "@/lib/data/busBodyMaterials";
 import { generateWhatsAppLink, generateBreadcrumbSchema } from "@/lib/seo-utils";
 import Script from "next/script";
-import { Bus, ArrowLeft, MessageCircle, Check, Box, ArrowRight } from "lucide-react";
+import { Bus, ArrowLeft, MessageCircle, Check, Box } from "lucide-react";
 
 export async function generateStaticParams() {
   return getAllBusBodyMaterialSlugs().map((slug) => ({ slug }));
@@ -104,18 +104,18 @@ export default async function BusBodyMaterialDetailPage({ params }: { params: Pr
         </div>
       </section>
 
-      {/* Features */}
-      {material.features && material.features.length > 0 && (
+      {/* Applications */}
+      {material.applications && material.applications.length > 0 && (
         <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-light tracking-tight mb-12" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-              Key <strong className="font-semibold">Features</strong>
+              Key <strong className="font-semibold">Applications</strong>
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {material.features.map((feature, idx) => (
+              {material.applications.map((app, idx) => (
                 <div key={idx} className="card p-8 flex items-start gap-4">
                   <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                  <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{feature}</span>
+                  <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{app}</span>
                 </div>
               ))}
             </div>
