@@ -31,61 +31,99 @@ export default async function VehiclePlywoodDetailPage({ params }: { params: Pro
   const whatsappMessage = `Hi AKMC, I need chequered plywood for ${vehicle.vehicleName}. Please share pricing.`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <Script id="breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }} />
+    <div>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }}
+      />
 
-      <Link href="/vehicle-plywood" className="inline-flex items-center gap-1 text-sm text-metal-500 hover:text-primary-700 mb-6">
-        <ArrowLeft className="w-4 h-4" /> Back to Vehicles
-      </Link>
+      <section className="akmc-hero hero-section">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/vehicle-plywood" className="inline-flex items-center gap-2 text-xs uppercase tracking-wider mb-8 hover:opacity-80 transition-opacity" style={{ color: "var(--text-muted)" }}>
+            <ArrowLeft className="w-3 h-3" />
+            Back to Vehicle Plywood
+          </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="aspect-square bg-metal-100 rounded-2xl flex items-center justify-center">
-          <Truck className="w-32 h-32 text-metal-300" />
-        </div>
-
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm px-2 py-1 bg-primary-50 text-primary-700 rounded-md">{vehicle.vehicleBrand}</span>
-          </div>
-          <h1 className="text-3xl font-bold text-metal-900 mb-4">{vehicle.vehicleName} Chequered Plywood</h1>
-          <p className="text-metal-600 mb-6 leading-relaxed">{vehicle.description}</p>
-
-          <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="p-4 bg-metal-50 rounded-xl">
-              <Ruler className="w-5 h-5 text-primary-600 mb-2" />
-              <p className="text-sm text-metal-500">Thickness</p>
-              <p className="font-semibold text-metal-900">{vehicle.thickness}</p>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div
+              className="aspect-square flex items-center justify-center"
+              style={{ border: "1px solid var(--border)", background: "var(--bg-alt)" }}
+            >
+              <Truck className="w-16 h-16" style={{ color: "var(--text-muted)" }} />
             </div>
-            <div className="p-4 bg-metal-50 rounded-xl">
-              <Box className="w-5 h-5 text-primary-600 mb-2" />
-              <p className="text-sm text-metal-500">Size</p>
-              <p className="font-semibold text-metal-900">{vehicle.size}</p>
+
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
+                {vehicle.vehicleBrand}
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-6" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+                {vehicle.vehicleName}
+              </h1>
+              <p className="text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
+                {vehicle.description}
+              </p>
+
+              <div className="mb-8">
+                <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
+                  Specifications
+                </h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="card p-4">
+                    <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>Thickness</div>
+                    <div className="text-sm font-medium" style={{ color: "var(--text)" }}>{vehicle.thickness}</div>
+                  </div>
+                  <div className="card p-4">
+                    <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>Size</div>
+                    <div className="text-sm font-medium" style={{ color: "var(--text)" }}>{vehicle.size}</div>
+                  </div>
+                  <div className="card p-4">
+                    <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>Material</div>
+                    <div className="text-sm font-medium" style={{ color: "var(--text)" }}>{vehicle.material}</div>
+                  </div>
+                  <div className="card p-4">
+                    <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>Finish</div>
+                    <div className="text-sm font-medium" style={{ color: "var(--text)" }}>{vehicle.finish}</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex flex-wrap gap-4">
+                <Link href={`/quote?product=${encodeURIComponent(vehicle.vehicleName)}`} className="btn-primary">
+                  <Box className="w-4 h-4 inline mr-2" />
+                  Get Quote
+                </Link>
+                <Link
+                  href={generateWhatsAppLink(whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                >
+                  <MessageCircle className="w-4 h-4 inline mr-2" />
+                  WhatsApp Enquiry
+                </Link>
+              </div>
             </div>
           </div>
-
-          <div className="mb-8">
-            <h3 className="font-semibold text-metal-900 mb-3">Key Features</h3>
-            <ul className="space-y-2">
-              {vehicle.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-metal-600">
-                  <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <a
-            href={generateWhatsAppLink(whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors"
-          >
-            <MessageCircle className="w-5 h-5" />
-            Get Quote on WhatsApp
-          </a>
         </div>
-      </div>
+      </section>
+
+      {/* Features */}
+      <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-light tracking-tight mb-12" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+            Product <strong className="font-semibold">Features</strong>
+          </h2>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {vehicle.features?.map((feature, idx) => (
+              <div key={idx} className="card p-8 flex items-start gap-4">
+                <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{feature}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

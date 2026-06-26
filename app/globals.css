@@ -1,13 +1,172 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./themes.css";
 
 @layer base {
   html {
     scroll-behavior: smooth;
   }
+
   body {
-    @apply bg-metal-50 text-metal-900;
+    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  /* Smooth theme transitions for all themed elements */
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
+}
+
+@layer components {
+  /* Container utility */
+  .akmc-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  @media (max-width: 768px) {
+    .akmc-container {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+  }
+
+  /* Section spacing */
+  .akmc-section {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  @media (max-width: 768px) {
+    .akmc-section {
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+  }
+
+  /* Hero section base */
+  .akmc-hero {
+    padding: 140px 64px 120px 64px;
+  }
+
+  @media (max-width: 768px) {
+    .akmc-hero {
+      padding: 100px 24px 64px 24px;
+    }
+  }
+
+  /* Grid layouts */
+  .akmc-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 992px) {
+    .akmc-grid-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .akmc-grid-4 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 992px) {
+    .akmc-grid-4 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .akmc-grid-4 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Stats strip */
+  .akmc-stats-strip {
+    padding: 60px 64px;
+  }
+
+  @media (max-width: 768px) {
+    .akmc-stats-strip {
+      padding: 40px 24px;
+    }
+  }
+
+  /* Showcase row */
+  .akmc-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 0;
+    margin-bottom: 48px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+  }
+
+  @media (max-width: 992px) {
+    .akmc-showcase {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .akmc-showcase-visual {
+    background: var(--bg-alt);
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+
+  @media (max-width: 992px) {
+    .akmc-showcase-visual {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+    }
+  }
+
+  .akmc-showcase-details {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .akmc-showcase-details {
+      padding: 32px 24px;
+    }
+  }
+}
+
+@layer utilities {
+  /* Text utilities that use theme vars */
+  .text-theme {
+    color: var(--text);
+  }
+
+  .text-theme-muted {
+    color: var(--text-muted);
+  }
+
+  .bg-theme {
+    background-color: var(--bg);
+  }
+
+  .bg-theme-alt {
+    background-color: var(--bg-alt);
+  }
+
+  .border-theme {
+    border-color: var(--border);
   }
 }

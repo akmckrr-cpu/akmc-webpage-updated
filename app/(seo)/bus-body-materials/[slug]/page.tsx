@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { busBodyMaterials, getBusBodyMaterialBySlug, getAllBusBodyMaterialSlugs } from "@/lib/data/busBodyMaterials";
-import { products, getProductsByCategory } from "@/lib/data/products";
 import { generateWhatsAppLink, generateBreadcrumbSchema } from "@/lib/seo-utils";
 import Script from "next/script";
 import { Bus, ArrowLeft, MessageCircle, Check, Box, ArrowRight } from "lucide-react";
@@ -32,84 +31,97 @@ export default async function BusBodyMaterialDetailPage({ params }: { params: Pr
   const whatsappMessage = `Hi AKMC, I need ${material.title}. Can you share pricing and availability?`;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <Script id="breadcrumb-schema" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }} />
+    <div>
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }}
+      />
 
-      <Link href="/bus-body-materials" className="inline-flex items-center gap-1 text-sm text-metal-500 hover:text-primary-700 mb-6">
-        <ArrowLeft className="w-4 h-4" /> Back to Bus Body Materials
-      </Link>
+      <section className="akmc-hero hero-section">
+        <div className="max-w-7xl mx-auto">
+          <Link href="/bus-body-materials" className="inline-flex items-center gap-2 text-xs uppercase tracking-wider mb-8 hover:opacity-80 transition-opacity" style={{ color: "var(--text-muted)" }}>
+            <ArrowLeft className="w-3 h-3" />
+            Back to Bus Body Materials
+          </Link>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div className="aspect-video bg-metal-100 rounded-2xl flex items-center justify-center">
-          <Bus className="w-32 h-32 text-metal-300" />
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div
+              className="aspect-square flex items-center justify-center"
+              style={{ border: "1px solid var(--border)", background: "var(--bg-alt)" }}
+            >
+              <Bus className="w-16 h-16" style={{ color: "var(--text-muted)" }} />
+            </div>
+
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
+                Bus Body Material
+              </div>
+              <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-6" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+                {material.title}
+              </h1>
+              <p className="text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
+                {material.description}
+              </p>
+
+              {material.specifications && (
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
+                    Specifications
+                  </h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {Object.entries(material.specifications).map(([key, value]) => (
+                      <div key={key} className="card p-4">
+                        <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>
+                          {key}
+                        </div>
+                        <div className="text-sm font-medium" style={{ color: "var(--text)" }}>
+                          {value}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-4">
+                <Link href={`/quote?product=${encodeURIComponent(material.title)}`} className="btn-primary">
+                  <Box className="w-4 h-4 inline mr-2" />
+                  Get Quote
+                </Link>
+                <Link
+                  href={generateWhatsAppLink(whatsappMessage)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-secondary"
+                >
+                  <MessageCircle className="w-4 h-4 inline mr-2" />
+                  WhatsApp Enquiry
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
 
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-sm px-2 py-1 bg-primary-50 text-primary-700 rounded-md">{material.category}</span>
-          </div>
-          <h1 className="text-3xl font-bold text-metal-900 mb-4">{material.title}</h1>
-          <p className="text-metal-600 mb-6 leading-relaxed">{material.description}</p>
-
-          <div className="mb-6">
-            <h3 className="font-semibold text-metal-900 mb-3">Applications</h3>
-            <ul className="space-y-2">
-              {material.applications.map((app, i) => (
-                <li key={i} className="flex items-start gap-2 text-sm text-metal-600">
-                  <Check className="w-4 h-4 text-green-500 shrink-0 mt-0.5" />
-                  {app}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="mb-6">
-            <h3 className="font-semibold text-metal-900 mb-3">Specifications</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {Object.entries(material.specifications).map(([key, value]) => (
-                <div key={key} className="p-3 bg-metal-50 rounded-lg">
-                  <p className="text-xs text-metal-500 uppercase">{key}</p>
-                  <p className="text-sm font-medium text-metal-900">{value}</p>
+      {/* Features */}
+      {material.features && material.features.length > 0 && (
+        <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-3xl font-light tracking-tight mb-12" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+              Key <strong className="font-semibold">Features</strong>
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {material.features.map((feature, idx) => (
+                <div key={idx} className="card p-8 flex items-start gap-4">
+                  <Check className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                  <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{feature}</span>
                 </div>
               ))}
             </div>
           </div>
-
-          <a
-            href={generateWhatsAppLink(whatsappMessage)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-green-500 text-white rounded-xl font-bold hover:bg-green-600 transition-colors"
-          >
-            <MessageCircle className="w-5 h-5" />
-            Get Quote on WhatsApp
-          </a>
-        </div>
-      </div>
-
-      {/* Related Products */}
-      <div className="mt-16">
-        <h2 className="text-2xl font-bold text-metal-900 mb-6">Related Products</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {material.relatedProducts.slice(0, 3).map((relatedSlug) => {
-            const related = products.find((p) => p.category === relatedSlug);
-            if (!related) return null;
-            return (
-              <Link
-                key={related.id}
-                href={`/products/${related.slug}`}
-                className="group p-5 bg-white rounded-xl border border-metal-200 hover:shadow-md transition-all"
-              >
-                <h3 className="font-semibold text-metal-900 group-hover:text-primary-700 transition-colors">{related.name}</h3>
-                <p className="text-sm text-metal-500 mt-1 line-clamp-2">{related.shortDescription}</p>
-                <div className="flex items-center gap-1 mt-3 text-sm text-primary-600">
-                  View Product <ArrowRight className="w-4 h-4" />
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+        </section>
+      )}
     </div>
   );
 }

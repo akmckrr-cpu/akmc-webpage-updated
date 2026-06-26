@@ -1,74 +1,84 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
-// Theme detection logic
-function getThemeForPath(pathname: string): string {
-  // Theme 1: Liquid Metal - Homepage
-  if (pathname === "/") {
-    return "liquid-metal";
-  }
+const THEME_CLASSES: Record<string, string> = {
+  "architectural-minimal": "theme-architectural-minimal",
+  "quiet-luxury": "theme-quiet-luxury",
+  "tech-brutalist": "theme-tech-brutalist",
+  "corporate-elite": "theme-corporate-elite",
+  "raw-eco": "theme-raw-eco",
+};
 
-  // Theme 2: Karur Blueprint - Location pages & About
-  // Matches /city-name/category-name pattern
-  const locationPattern = /^\/[a-z-]+\/[a-z-]+$/;
-  if (locationPattern.test(pathname) || pathname === "/about") {
-    return "karur-blueprint";
-  }
+const THEME_LABELS: Record<string, string> = {
+  "architectural-minimal": "Architectural Minimal",
+  "quiet-luxury": "Quiet Luxury",
+  "tech-brutalist": "Tech Brutalist",
+  "corporate-elite": "Corporate Elite",
+  "raw-eco": "Raw Eco Matrix",
+};
 
-  // Theme 3: Neon Forge - ACP Design pages
-  if (pathname.startsWith("/acp-designs")) {
-    return "neon-forge";
-  }
+const THEME_SWATCHES: Record<string, string[]> = {
+  "architectural-minimal": ["#FFFFFF", "#002D62"],
+  "quiet-luxury": ["#F7F5F0", "#002D62"],
+  "tech-brutalist": ["#0B0F19", "#FFFFFF"],
+  "corporate-elite": ["#F4F6F9", "#002D62"],
+  "raw-eco": ["#F9F9F6", "#1C2B24"],
+};
 
-  // Theme 4: Tactile Material - Product detail pages
-  if (
-    pathname.startsWith("/products/") ||
-    pathname.startsWith("/vehicle-plywood/") ||
-    pathname.startsWith("/bus-body-materials/")
-  ) {
-    return "tactile-material";
-  }
+export default function ThemeProvider({ children }: { children: ReactNode }) {
+  const [activeTheme, setActiveTheme] = useState<string>("architectural-minimal");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Theme 5: Circular Factory - Quote & Sustainability
-  if (pathname === "/quote" || pathname === "/sustainability") {
-    return "circular-factory";
-  }
+  useEffect(() => {
+    const saved = localStorage.getItem("akmc-theme");
+    if (saved && THEME_CLASSES[saved]) setActiveTheme(saved);
+  }, []);
 
-  // Theme 6: Apple Premium - Enterprise/Premium pages
-  if (pathname.startsWith("/premium") || pathname === "/enterprise") {
-    return "apple-premium";
-  }
+  useEffect(() => {
+    const body = document.body;
+    Object.values(THEME_CLASSES).forEach((cls) => body.classList.remove(cls));
+    body.classList.add(THEME_CLASSES[activeTheme]);
+  }, [activeTheme]);
 
-  // Default: No theme override (uses base styles)
-  return "default";
-}
+  useEffect(() => {
+    function handleClick(e: MouseEvent) {
+      if (!(e.target as HTMLElement).closest(".theme-switcher")) {
+        setDropdownOpen(false);
+      }
+    }
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
 
-interface ThemeProviderProps {
-  children: ReactNode;
-}
-
-export default function ThemeProvider({ children }: ThemeProviderProps) {
-  const pathname = usePathname();
-  const theme = getThemeForPath(pathname);
-
-  // Map theme names to CSS class names
-  const themeClassMap: Record<string, string> = {
-    "liquid-metal": "theme-liquid-metal",
-    "karur-blueprint": "theme-karur-blueprint",
-    "neon-forge": "theme-neon-forge",
-    "tactile-material": "theme-tactile-material",
-    "circular-factory": "theme-circular-factory",
-    "apple-premium": "theme-apple-premium",
-    "default": "",
+  const changeTheme = (themeKey: string) => {
+    setActiveTheme(themeKey);
+    localStorage.setItem("akmc-theme", themeKey);
+    setDropdownOpen(false);
   };
 
-  const themeClass = themeClassMap[theme] || "";
-
   return (
-    <div className={themeClass} data-theme={theme}>
+    <div className="preview-container">
       {children}
+      <div className="theme-switcher">
+        <div className={`theme-switcher-dropdown ${dropdownOpen ? "open" : ""}`}>
+          <div className="theme-switcher-header">Select Brand Tone</div>
+          {Object.entries(THEME_LABELS).map(([key, label]) => (
+            <div key={key} className={`theme-option ${activeTheme === key ? "active" : ""}`} onClick={() => changeTheme(key)}>
+              <span>{label}</span>
+              <div className="swatch-box">
+                {THEME_SWATCHES[key].map((color, i) => (
+                  <div key={i} className="swatch-dot" style={{ backgroundColor: color }} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <button className="theme-switcher-trigger" onClick={() => setDropdownOpen(!dropdownOpen)}>
+          <span>Tone:</span>
+          <span style={{ color: "#FFF" }}>{THEME_LABELS[activeTheme]}</span>
+        </button>
+      </div>
     </div>
   );
 }
