@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { categories } from "@/lib/data/categories";
 import { acpDesigns } from "@/lib/data/acp-designs";
-import { vehiclePlywoodItems } from "@/lib/data/vehicle-plywood";
+import { vehiclePlywoodItems } from "@/lib/data/vehiclePlywood";
 import { cities } from "@/lib/data/cities";
 import { Ruler, Sheet, Layers, Grid3X3, Paintbrush, Droplets, Wrench } from "lucide-react";
 
@@ -853,7 +853,7 @@ export default function HomePage() {
           </h2>
           <div style={{ justifySelf: "end" }}>
             <Link
-              href="/vehicle-plywood"
+              href="/vehiclePlywood"
               style={{
                 color: "var(--text)",
                 textDecoration: "none",
@@ -876,7 +876,7 @@ export default function HomePage() {
           {featuredVehicles.map((vehicle) => (
             <Link
               key={vehicle.slug}
-              href={`/vehicle-plywood/${vehicle.slug}`}
+              href={`/vehiclePlywood/${vehicle.slug}`}
               style={{
                 background: "var(--card-bg)",
                 border: "1px solid var(--border)",
