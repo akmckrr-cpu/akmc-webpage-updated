@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { products, getProductBySlug, getAllProductSlugs } from "@/lib/data/products";
-import { categories, getCategoryBySlug } from "@/lib/data/categories";
+import { getProductBySlug, getAllProductSlugs } from "@/lib/data/products";
+import { getCategoryBySlug } from "@/lib/data/categories";
 import { generateProductSchema, generateFAQSchema, generateBreadcrumbSchema, generateWhatsAppLink } from "@/lib/seo-utils";
 import Script from "next/script";
-import { ShoppingCart, MessageCircle, Phone, ChevronRight, CheckCircle2, Ruler } from "lucide-react";
+import { ShoppingCart, MessageCircle, ChevronRight, CheckCircle2, Ruler } from "lucide-react";
 
 export async function generateStaticParams() {
   return getAllProductSlugs().map((slug) => ({ slug }));
@@ -56,7 +56,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }}
       />
 
-      {/* Hero / Product Header */}
       <section className="akmc-hero hero-section">
         <div className="max-w-7xl mx-auto">
           <div className="flex items-center gap-2 text-xs uppercase tracking-wider mb-6" style={{ color: "var(--text-muted)" }}>
@@ -70,7 +69,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Product Image Placeholder */}
             <div
               className="aspect-square flex items-center justify-center"
               style={{ border: "1px solid var(--border)", background: "var(--bg-alt)" }}
@@ -78,7 +76,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
               <Ruler className="w-16 h-16" style={{ color: "var(--text-muted)" }} />
             </div>
 
-            {/* Product Details */}
             <div>
               <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
                 {category?.displayName}
@@ -90,20 +87,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 {product.description}
               </p>
 
-              {/* Specifications */}
-              {product.specifications && product.specifications.length > 0 && (
+              {/* Specs - using product.specs (not specifications) */}
+              {product.specs && Object.keys(product.specs).length > 0 && (
                 <div className="mb-8">
                   <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
                     Specifications
                   </h3>
                   <div className="grid grid-cols-2 gap-3">
-                    {product.specifications.map((spec) => (
-                      <div key={spec.label} className="card p-4">
+                    {Object.entries(product.specs).map(([key, value]) => (
+                      <div key={key} className="card p-4">
                         <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>
-                          {spec.label}
+                          {key}
                         </div>
                         <div className="text-sm font-medium" style={{ color: "var(--text)" }}>
-                          {spec.value}
+                          {value}
                         </div>
                       </div>
                     ))}
@@ -111,7 +108,28 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </div>
               )}
 
-              {/* Actions */}
+              {/* Variants */}
+              {product.variants && product.variants.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
+                    Available Variants
+                  </h3>
+                  <div className="space-y-2">
+                    {product.variants.map((variant) => (
+                      <div key={variant.id} className="card p-4 flex items-center justify-between">
+                        <div>
+                          <div className="text-sm font-medium" style={{ color: "var(--text)" }}>{variant.name}</div>
+                          <div className="text-xs" style={{ color: "var(--text-muted)" }}>{variant.value}</div>
+                        </div>
+                        <div className="text-sm font-medium" style={{ color: "var(--text)" }}>
+                          Rs. {variant.price}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={`/quote?product=${encodeURIComponent(product.name)}`}
@@ -131,45 +149,6 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
                 </Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features & Applications */}
-      <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {product.features && product.features.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-light tracking-tight mb-8" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-                  Key <strong className="font-semibold">Features</strong>
-                </h2>
-                <div className="space-y-4">
-                  {product.features.map((feature, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                      <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {product.applications && product.applications.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-light tracking-tight mb-8" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-                  <strong className="font-semibold">Applications</strong>
-                </h2>
-                <div className="space-y-4">
-                  {product.applications.map((app, idx) => (
-                    <div key={idx} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
-                      <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{app}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
           </div>
         </div>
       </section>
