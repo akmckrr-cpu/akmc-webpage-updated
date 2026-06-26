@@ -7,6 +7,8 @@ import { Footer } from "@/components/Footer";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
 import Script from "next/script";
 import { generateLocalBusinessSchema } from "@/lib/seo-utils";
+import "./themes.css";
+import ThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -74,7 +76,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} font-sans antialiased bg-metal-50 text-metal-900`}>
         <Navbar />
-        <main>{children}</main>
+        <main><ThemeProvider>{children}<ThemeProvider></main>
         <Footer />
         <WhatsAppButton />
         <Toaster position="bottom-right" />
