@@ -1,93 +1,80 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { acpDesigns, getACPDesignBySlug, getAllACPSlugs } from "@/lib/data/acpDesigns";
-import { generateWhatsAppLink, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { getLocationPage, getAllLocationPagePaths } from "@/lib/data/seoPages";
+import { generateLocationPageSchema, generateBreadcrumbSchema, generateWhatsAppLink } from "@/lib/seo-utils";
 import Script from "next/script";
-import { Layers, ArrowLeft, MessageCircle, Ruler, Palette, Check } from "lucide-react";
+import { MapPin, Phone, MessageCircle, ChevronRight, Truck, CheckCircle2 } from "lucide-react";
 
 export async function generateStaticParams() {
-  return getAllACPSlugs().map((slug) => ({ slug }));
+  return getAllLocationPagePaths().map(({ city, category }) => ({
+    city,
+    category,
+  }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
-  const design = getACPDesignBySlug(slug);
-  if (!design) return { title: "Design Not Found" };
-  return { title: design.seoTitle, description: design.seoDescription };
+export async function generateMetadata({ params }: { params: Promise<{ city: string; category: string }> }): Promise<Metadata> {
+  const { city, category } = await params;
+  const page = getLocationPage(city, category);
+  if (!page) return { title: "Not Found" };
+  return {
+    title: page.seoTitle,
+    description: page.seoDescription,
+  };
 }
 
-export default async function ACPDesignDetailPage({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params;
-  const design = getACPDesignBySlug(slug);
-  if (!design) notFound();
+export default async function LocationCategoryPage({ params }: { params: Promise<{ city: string; category: string }> }) {
+  const { city: citySlug, category: categorySlug } = await params;
+  const page = getLocationPage(citySlug, categorySlug);
+  if (!page) notFound();
 
   const breadcrumbs = [
     { name: "Home", url: "/" },
-    { name: "ACP Designs", url: "/acp-designs" },
-    { name: design.designName, url: `/acp-designs/${design.slug}` },
+    { name: page.categoryDisplay, url: `/products?category=${categorySlug}` },
+    { name: page.city, url: `/${citySlug}/${categorySlug}` },
   ];
 
-  const whatsappMessage = `Hi AKMC, I am interested in the ${design.designName} ACP design. Can you share pricing and availability?`;
+  const schema = generateLocationPageSchema(page);
+  const whatsappMessage = `Hi AKMC, I need ${page.categoryDisplay.toLowerCase()} in ${page.city}. Please share your catalog and pricing.`;
 
   return (
     <div>
+      <Script
+        id="location-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
       <Script
         id="breadcrumb-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(generateBreadcrumbSchema(breadcrumbs)) }}
       />
 
+      {/* Hero */}
       <section className="akmc-hero hero-section">
         <div className="max-w-7xl mx-auto">
-          <Link href="/acp-designs" className="inline-flex items-center gap-2 text-xs uppercase tracking-wider mb-8 hover:opacity-80 transition-opacity" style={{ color: "var(--text-muted)" }}>
-            <ArrowLeft className="w-3 h-3" />
-            Back to Designs
-          </Link>
+          <div className="flex items-center gap-2 text-xs uppercase tracking-wider mb-6" style={{ color: "var(--text-muted)" }}>
+            <Link href="/" className="hover:opacity-80 transition-opacity">Home</Link>
+            <ChevronRight className="w-3 h-3" />
+            <Link href={`/products?category=${categorySlug}`} className="hover:opacity-80 transition-opacity">{page.categoryDisplay}</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span style={{ color: "var(--text)" }}>{page.city}</span>
+          </div>
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div
-              className="aspect-square flex items-center justify-center"
-              style={{ border: "1px solid var(--border)", background: "var(--bg-alt)" }}
-            >
-              <Palette className="w-16 h-16" style={{ color: "var(--text-muted)" }} />
-            </div>
-
             <div>
               <div className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text-muted)" }}>
-                {design.series} Series
+                Location Page
               </div>
               <h1 className="text-4xl lg:text-5xl font-light tracking-tight mb-6" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-                {design.designName}
+                {page.categoryDisplay} in <strong className="font-semibold">{page.city}</strong>
               </h1>
               <p className="text-base font-light leading-relaxed mb-8" style={{ color: "var(--text-muted)" }}>
-                {design.description}
+                {page.description}
               </p>
-
-              {design.specifications && (
-                <div className="mb-8">
-                  <h3 className="text-sm font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
-                    Specifications
-                  </h3>
-                  <div className="grid grid-cols-2 gap-3">
-                    {Object.entries(design.specifications).map(([key, value]) => (
-                      <div key={key} className="card p-4">
-                        <div className="text-xs uppercase tracking-wider mb-1" style={{ color: "var(--text-muted)" }}>
-                          {key}
-                        </div>
-                        <div className="text-sm font-medium" style={{ color: "var(--text)" }}>
-                          {value}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
               <div className="flex flex-wrap gap-4">
-                <Link href={`/quote?product=${encodeURIComponent(design.designName)}`} className="btn-primary">
-                  <Layers className="w-4 h-4 inline mr-2" />
-                  Get Quote
+                <Link href="/quote" className="btn-primary">
+                  Request Quote
                 </Link>
                 <Link
                   href={generateWhatsAppLink(whatsappMessage)}
@@ -100,35 +87,91 @@ export default async function ACPDesignDetailPage({ params }: { params: Promise<
                 </Link>
               </div>
             </div>
+
+            <div className="card p-10">
+              <div className="flex items-start gap-4 mb-6">
+                <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                <div>
+                  <div className="text-sm font-medium mb-1" style={{ color: "var(--text)" }}>Serving {page.city}</div>
+                  <div className="text-sm font-light" style={{ color: "var(--text-muted)" }}>
+                    Fast delivery to {page.city} and surrounding areas
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start gap-4 mb-6">
+                <Truck className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                <div>
+                  <div className="text-sm font-medium mb-1" style={{ color: "var(--text)" }}>Pan India Delivery</div>
+                  <div className="text-sm font-light" style={{ color: "var(--text-muted)" }}>
+                    Delivery across Tamil Nadu, Kerala & Karnataka
+                  </div>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <CheckCircle2 className="w-5 h-5 mt-0.5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                <div>
+                  <div className="text-sm font-medium mb-1" style={{ color: "var(--text)" }}>AIS-052 Compliant</div>
+                  <div className="text-sm font-light" style={{ color: "var(--text-muted)" }}>
+                    All materials meet automotive industry standards
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Related Designs */}
+      {/* Products for this location */}
       <section className="akmc-section" style={{ borderTop: "1px solid var(--border)" }}>
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl font-light tracking-tight mb-12" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-            More from <strong className="font-semibold">{design.series}</strong> Series
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {acpDesigns
-              .filter((d) => d.series === design.series && d.slug !== design.slug)
-              .slice(0, 4)
-              .map((related) => (
-                <Link key={related.slug} href={`/acp-designs/${related.slug}`} className="card group overflow-hidden">
-                  <div className="aspect-square flex items-center justify-center" style={{ background: "var(--bg-alt)" }}>
-                    <Palette className="w-10 h-10" style={{ color: "var(--text-muted)" }} />
+          <div className="grid lg:grid-cols-3 gap-12">
+            <div className="lg:col-span-2">
+              <h2 className="text-3xl font-light tracking-tight mb-8" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+                Available <strong className="font-semibold">{page.categoryDisplay}</strong> in {page.city}
+              </h2>
+              <div className="space-y-4">
+                {page.products.map((product, idx) => (
+                  <div key={idx} className="card p-6 flex items-center gap-4">
+                    <CheckCircle2 className="w-5 h-5 flex-shrink-0" style={{ color: "var(--accent)" }} />
+                    <span className="text-sm font-light" style={{ color: "var(--text-muted)" }}>{product}</span>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-lg font-medium tracking-tight mb-1" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
-                      {related.designName}
-                    </h3>
-                    <p className="text-xs uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>
-                      {related.series}
-                    </p>
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="card p-8 sticky top-24">
+                <h3 className="text-lg font-medium tracking-tight mb-6" style={{ fontFamily: "var(--font-display)", color: "var(--text)" }}>
+                  Quick Enquiry
+                </h3>
+                <div className="space-y-4">
+                  <Link href="/quote" className="btn-primary w-full text-center block text-xs">
+                    Get Quote
+                  </Link>
+                  <Link
+                    href={generateWhatsAppLink(whatsappMessage)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary w-full text-center block text-xs"
+                  >
+                    <Phone className="w-4 h-4 inline mr-2" />
+                    Call / WhatsApp
+                  </Link>
+                </div>
+
+                {page.nearbyAreas.length > 0 && (
+                  <div className="mt-8 pt-6" style={{ borderTop: "1px solid var(--border)" }}>
+                    <h4 className="text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "var(--text)" }}>
+                      Nearby Areas
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {page.nearbyAreas.map((area) => (
+                        <span key={area} className="tag">{area}</span>
+                      ))}
+                    </div>
                   </div>
-                </Link>
-              ))}
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
