@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { categories } from "@/lib/data/categories";
-import { acpDesigns } from "@/lib/data/acp-designs";
+import { acpDesigns } from "@/lib/data/acpDesigns";
 import { vehiclePlywoodItems } from "@/lib/data/vehiclePlywood";
 import { cities } from "@/lib/data/cities";
 import { Ruler, Sheet, Layers, Grid3X3, Paintbrush, Droplets, Wrench } from "lucide-react";
@@ -746,7 +746,7 @@ export default function HomePage() {
           </h2>
           <div style={{ justifySelf: "end" }}>
             <Link
-              href="/acp-designs"
+              href="/acpDesigns"
               style={{
                 color: "var(--text)",
                 textDecoration: "none",
@@ -769,7 +769,7 @@ export default function HomePage() {
           {featuredACP.map((design) => (
             <Link
               key={design.slug}
-              href={`/acp-designs/${design.slug}`}
+              href={`/acpDesigns/${design.slug}`}
               style={{
                 background: "var(--card-bg)",
                 border: "1px solid var(--border)",
