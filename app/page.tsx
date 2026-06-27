@@ -88,8 +88,6 @@ export default function HomePage() {
                 textDecoration: "none",
                 transition: "opacity 0.3s",
               }}
-              onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = "0.9"; }}
-              onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = "1"; }}
             >
               Explore Materials Matrix
             </Link>
@@ -330,12 +328,6 @@ export default function HomePage() {
                 minHeight: "320px",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--text)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              }}
             >
               <span
                 style={{
@@ -435,12 +427,6 @@ export default function HomePage() {
                 justifyContent: "space-between",
                 minHeight: "280px",
                 transition: "all 0.3s ease",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--text)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
               }}
             >
               <div>
@@ -779,12 +765,6 @@ export default function HomePage() {
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--text)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              }}
             >
               <div
                 style={{
@@ -886,12 +866,6 @@ export default function HomePage() {
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--text)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              }}
             >
               <div
                 style={{
@@ -986,12 +960,6 @@ export default function HomePage() {
                 textDecoration: "none",
                 transition: "all 0.3s ease",
               }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--text)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.borderColor = "var(--border)";
-              }}
             >
               <h3
                 style={{
@@ -1058,8 +1026,6 @@ export default function HomePage() {
             transition: "opacity 0.3s",
             display: "inline-block",
           }}
-          onMouseEnter={(e) => { (e.target as HTMLElement).style.opacity = "0.9"; }}
-          onMouseLeave={(e) => { (e.target as HTMLElement).style.opacity = "1"; }}
         >
           Request a Quote
         </Link>

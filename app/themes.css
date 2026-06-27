@@ -761,3 +761,30 @@
             grid-template-columns: 1fr !important;
           }
         }
+
+/* ===== HOVER UTILITIES (replacing inline event handlers) ===== */
+
+/* Link/button hover opacity */
+.hover-opacity:hover {
+  opacity: 0.9;
+}
+
+/* Card hover border */
+.hover-border:hover {
+  border-color: var(--text) !important;
+}
+
+/* Scale hover for WhatsApp */
+.hover-scale:hover {
+  transform: scale(1.1);
+}
+
+/* Nav link hover */
+.nav-link:hover {
+  color: var(--text) !important;
+}
+
+/* Footer link hover */
+.footer-link:hover {
+  color: var(--text) !important;
+}
