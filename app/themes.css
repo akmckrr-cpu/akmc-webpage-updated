@@ -714,77 +714,80 @@
   }
 }
 
-
-/* ===== RESPONSIVE STYLES FROM PAGE.TSX ===== */
-@media (max-width: 992px) {
-          .hero-responsive {
-            grid-template-columns: 1fr !important;
-            gap: 48px !important;
-            padding: 100px 24px 64px 24px !important;
-          }
-          .section-responsive {
-            padding: 80px 24px !important;
-          }
-          .section-header-responsive {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-          .section-desc-responsive {
-            justify-self: start !important;
-          }
-          .grid-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .grid-4-responsive {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .stats-responsive {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 32px !important;
-          }
-          .showcase-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .showcase-visual-responsive {
-            border-right: none !important;
-            border-bottom: 1px solid var(--border) !important;
-          }
-          .showcase-details-responsive {
-            padding: 32px 24px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .grid-4-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .stats-responsive {
-            grid-template-columns: 1fr !important;
-          }
-        }
-
-/* ===== HOVER UTILITIES (replacing inline event handlers) ===== */
-
-/* Link/button hover opacity */
+/* ===== HOVER UTILITIES ===== */
 .hover-opacity:hover {
   opacity: 0.9;
 }
 
-/* Card hover border */
 .hover-border:hover {
   border-color: var(--text) !important;
 }
 
-/* Scale hover for WhatsApp */
 .hover-scale:hover {
   transform: scale(1.1);
 }
 
-/* Nav link hover */
 .nav-link:hover {
   color: var(--text) !important;
 }
 
-/* Footer link hover */
 .footer-link:hover {
   color: var(--text) !important;
+}
+
+/* ===== RESPONSIVE STYLES ===== */
+@media (max-width: 992px) {
+  .hero-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+    padding: 100px 24px 64px 24px !important;
+  }
+  .section-responsive {
+    padding: 80px 24px !important;
+  }
+  .section-header-responsive {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .section-desc-responsive {
+    justify-self: start !important;
+  }
+  .grid-responsive {
+    grid-template-columns: 1fr !important;
+  }
+  .grid-4-responsive {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .stats-responsive {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px !important;
+  }
+  .showcase-responsive {
+    grid-template-columns: 1fr !important;
+  }
+  .showcase-visual-responsive {
+    border-right: none !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .showcase-details-responsive {
+    padding: 32px 24px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-4-responsive {
+    grid-template-columns: 1fr !important;
+  }
+  .stats-responsive {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

@@ -1,27 +1,23 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import "./themes.css";
 import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import Script from "next/script";
 import { generateLocalBusinessSchema } from "@/lib/seo-utils";
-import ThemeProvider from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const jetbrains = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
   title: {
-    default: "A Karur Metal Co. | Bus Body Building Materials Supplier",
-    template: "%s | A Karur Metal Co.",
+    default: "AKMC — Premium Bus Body Materials | Karur, Tamil Nadu",
+    template: "%s | AKMC",
   },
   description:
-    "Leading bus body building materials supplier in Karur, Tamil Nadu. Aluminium extrusions, ACP sheets, chequered plywood, paints, sealants, and hardware. Supply across Tamil Nadu, Kerala & Karnataka.",
+    "A Karur Metal Co. — Leading supplier of aluminium extrusions, ACP sheets, chequered plywood, paints, sealants & hardware for bus body construction across South India.",
   keywords: [
     "bus body materials",
     "aluminium extrusion",
@@ -38,7 +34,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "A Karur Metal Co.",
+    siteName: "AKMC",
   },
   twitter: {
     card: "summary_large_image",
@@ -67,21 +63,18 @@ export default function RootLayout({
   const localBusinessSchema = generateLocalBusinessSchema();
 
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable} ${jetbrains.variable}`}>
-      <body className="theme-architectural-minimal">
-        <ThemeProvider>
-          <Script
-            id="local-business-schema"
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
-          />
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <WhatsAppButton />
-          <ThemeSwitcher />
-          <Toaster position="bottom-right" />
-        </ThemeProvider>
+    <html lang="en" className={inter.variable}>
+      <body style={{ background: "#0A0A0A", color: "#fff", margin: 0, padding: 0, fontFamily: "'Inter', -apple-system, sans-serif" }}>
+        <Script
+          id="local-business-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <WhatsAppButton />
+        <Toaster position="bottom-right" />
       </body>
     </html>
   );

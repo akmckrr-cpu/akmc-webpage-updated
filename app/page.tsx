@@ -1,20 +1,17 @@
-import { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
 import { 
-  Phone, MessageCircle, ArrowRight, Ruler, Sheet, Layers, 
-  Grid3X3, Paintbrush, Droplets, Wrench, Truck, Star,
-  MapPin, CheckCircle2
+  ArrowRight, ChevronDown, Shield, Layers, Truck, Headphones,
+  Ruler, Sheet, Grid3X3, Paintbrush, Droplets, Wrench, CheckCircle2,
+  Star, MapPin, Phone, MessageCircle
 } from "lucide-react";
 import { categories } from "@/lib/data/categories";
 import { cities } from "@/lib/data/cities";
 import { acpDesigns } from "@/lib/data/acpDesigns";
 import { vehiclePlywoodItems } from "@/lib/data/vehiclePlywood";
 import { generateWhatsAppLink } from "@/lib/seo-utils";
-
-export const metadata: Metadata = {
-  title: "Bus Body Building Materials Supplier | Karur, Tamil Nadu",
-  description: "A Karur Metal Co. - Leading supplier of aluminium extrusions, ACP sheets, chequered plywood, paints, sealants & hardware for bus body construction. Supply across Tamil Nadu, Kerala & Karnataka.",
-};
 
 const iconMap: Record<string, React.ReactNode> = {
   Ruler: <Ruler size={24} />,
@@ -32,543 +29,282 @@ export default function HomePage() {
   const featuredVehicles = vehiclePlywoodItems.slice(0, 4);
 
   return (
-    <div>
+    <div style={{ background: "#0A0A0A", color: "#fff", fontFamily: "'Inter', -apple-system, sans-serif" }}>
+
       {/* ===== HERO SECTION ===== */}
-      <section
-        style={{
-          padding: "140px 64px 120px 64px",
-          maxWidth: "1400px",
-          margin: "0 auto",
-          display: "grid",
-          gridTemplateColumns: "1.2fr 0.8fr",
-          gap: "80px",
-          alignItems: "center",
-        }}
-        className="hero-responsive"
-      >
-        <div style={{ maxWidth: "780px" }}>
-          <div
-            style={{
-              fontSize: "11px",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.2em",
-              color: "var(--text-muted)",
-              marginBottom: "32px",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-            }}
-          >
-            <Star size={14} style={{ color: "var(--accent)" }} />
-            Trusted by 500+ Bus Body Builders Across South India
+      <section style={{
+        minHeight: "100vh", position: "relative",
+        display: "grid", gridTemplateColumns: "1fr 1fr",
+        alignItems: "center", overflow: "hidden",
+        paddingTop: "80px",
+      }} className="hero-responsive">
+        {/* Left Content */}
+        <div style={{ padding: "0 64px 0 48px", maxWidth: "640px", zIndex: 2 }}>
+          <div style={{
+            fontSize: "11px", fontWeight: 600, textTransform: "uppercase",
+            letterSpacing: "0.2em", color: "#C9A96E", marginBottom: "24px",
+          }}>
+            PREMIUM MATERIALS.<br />STRONGER VEHICLES.
           </div>
-          <h1
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(44px, 5.5vw, 76px)",
-              fontWeight: 200,
-              letterSpacing: "-0.03em",
-              lineHeight: 1.08,
-              marginBottom: "36px",
-              color: "var(--text)",
-            }}
-          >
-            Bus Body Building<br />
-            <strong style={{ fontWeight: 600 }}>Materials Supplier</strong>
+
+          <h1 style={{
+            fontSize: "clamp(48px, 6vw, 80px)", fontWeight: 700,
+            lineHeight: 1.05, letterSpacing: "-0.02em",
+            marginBottom: "24px", color: "#fff",
+          }}>
+            EVERY<br />JOURNEY<br />STARTS<br /><span style={{ color: "#C9A96E" }}>HERE.</span>
           </h1>
-          <p
-            style={{
-              fontSize: "18px",
-              fontWeight: 300,
-              lineHeight: 1.6,
-              color: "var(--text-muted)",
-              marginBottom: "16px",
-              maxWidth: "580px",
-            }}
-          >
-            Aluminium Extrusions &bull; ACP Sheets &bull; Aluminium Sheets &bull; Chequered Plywood &bull; Paints &bull; Hardware
+
+          <p style={{
+            fontSize: "15px", lineHeight: 1.7, color: "rgba(255,255,255,0.55)",
+            marginBottom: "40px", maxWidth: "380px",
+          }}>
+            High performance materials for bus builders who never compromise on quality.
           </p>
-          <p
-            style={{
-              fontSize: "16px",
-              fontWeight: 300,
-              lineHeight: 1.6,
-              color: "var(--text-muted)",
-              marginBottom: "48px",
-              maxWidth: "580px",
-            }}
-          >
-            Supply Across Tamil Nadu, Kerala & Karnataka
-          </p>
+
           <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-            <a
-              href="tel:+919876543210"
-              style={{
-                background: "var(--btn-bg)",
-                color: "var(--btn-text)",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                textDecoration: "none",
-                transition: "opacity 0.3s",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
+            <Link href="/products" style={{
+              background: "#C9A96E", color: "#0A0A0A",
+              padding: "14px 28px", fontSize: "13px", fontWeight: 600,
+              textDecoration: "none", display: "flex", alignItems: "center", gap: "8px",
+              transition: "all 0.3s",
+            }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = "#b8985d"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "#C9A96E"; }}
             >
-              <Phone size={16} /> Call Now
-            </a>
-            <a
-              href={generateWhatsAppLink("Hi AKMC, I need a quote for bus body building materials.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                background: "#25D366",
-                color: "#fff",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                textDecoration: "none",
-                transition: "opacity 0.3s",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
+              Explore Products <ArrowRight size={16} />
+            </Link>
+            <Link href="/products" style={{
+              background: "transparent", color: "#fff",
+              border: "1px solid rgba(255,255,255,0.25)",
+              padding: "14px 28px", fontSize: "13px", fontWeight: 500,
+              textDecoration: "none", display: "flex", alignItems: "center", gap: "8px",
+              transition: "all 0.3s",
+            }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#C9A96E"; e.currentTarget.style.color = "#C9A96E"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"; e.currentTarget.style.color = "#fff"; }}
             >
-              <MessageCircle size={16} /> WhatsApp
-            </a>
-            <Link
-              href="/products"
-              style={{
-                background: "transparent",
-                color: "var(--text)",
-                border: "1px solid var(--text)",
-                padding: "14px 32px",
-                fontSize: "13px",
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                textDecoration: "none",
-                transition: "all 0.3s",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              Browse Products <ArrowRight size={16} />
+              View Applications <ArrowRight size={16} />
             </Link>
           </div>
-        </div>
-        <div
-          style={{
-            border: "1px solid var(--border)",
-            aspectRatio: "1 / 1",
-            position: "relative",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "var(--bg-alt)",
-          }}
-        >
-          <div style={{ width: "40px", height: "40px", position: "relative" }}>
-            <div style={{ position: "absolute", top: "19px", left: 0, width: "40px", height: "1px", background: "var(--border)" }} />
-            <div style={{ position: "absolute", left: "19px", top: 0, width: "1px", height: "40px", background: "var(--border)" }} />
-          </div>
-        </div>
-      </section>
 
-      {/* ===== STATS STRIP ===== */}
-      <section
-        style={{
-          borderTop: "1px solid var(--border)",
-          borderBottom: "1px solid var(--border)",
-          background: "var(--bg-alt)",
-          padding: "60px 64px",
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            maxWidth: "1272px",
-            margin: "0 auto",
-          }}
-          className="stats-responsive"
-        >
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "54px", fontWeight: 200, letterSpacing: "-0.03em", marginBottom: "8px", color: "var(--text)" }}>20+</div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-muted)" }}>Industrial Hubs Served</div>
-          </div>
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "54px", fontWeight: 200, letterSpacing: "-0.03em", marginBottom: "8px", color: "var(--text)" }}>500+</div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-muted)" }}>Contracted Coach Builders</div>
-          </div>
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "54px", fontWeight: 200, letterSpacing: "-0.03em", marginBottom: "8px", color: "var(--text)" }}>AIS-052</div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-muted)" }}>Regulatory Code Compliance</div>
-          </div>
-          <div>
-            <div style={{ fontFamily: "var(--font-display)", fontSize: "54px", fontWeight: 200, letterSpacing: "-0.03em", marginBottom: "8px", color: "var(--text)" }}>0.8mm+</div>
-            <div style={{ fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.15em", color: "var(--text-muted)" }}>Aluminium Gauge Profiling</div>
+          {/* Scroll indicator */}
+          <div style={{ marginTop: "60px", display: "flex", alignItems: "center", gap: "10px", color: "rgba(255,255,255,0.4)", fontSize: "12px" }}>
+            <div style={{ width: "1px", height: "40px", background: "rgba(255,255,255,0.3)", position: "relative" }}>
+              <div style={{ position: "absolute", top: 0, left: "-2px", width: "5px", height: "5px", borderRadius: "50%", background: "#C9A96E", animation: "scrollBounce 2s infinite" }} />
+            </div>
+            Scroll to explore
           </div>
         </div>
-      </section>
 
-      {/* ===== PRODUCT CATEGORIES ===== */}
-      <section
-        style={{ padding: "120px 64px", borderTop: "1px solid var(--border)", maxWidth: "1400px", margin: "0 auto" }}
-        className="section-responsive"
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: "80px", alignItems: "end" }} className="section-header-responsive">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)" }}>
-            Product <strong style={{ fontWeight: 600 }}>Categories</strong>
-          </h2>
-          <p style={{ fontSize: "15px", color: "var(--text-muted)", lineHeight: 1.6, maxWidth: "440px", justifySelf: "end" }} className="section-desc-responsive">
-            Complete range of materials for bus body construction, from structural aluminium to interior finishes.
-          </p>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }} className="grid-responsive">
-          {categories.map((cat) => (
-            <Link
-              key={cat.slug}
-              href={`/products?category=${cat.slug}`}
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-                padding: "48px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                minHeight: "280px",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-              }}
-            >
-              <div>
-                <div style={{ color: "var(--text-muted)", marginBottom: "16px" }}>
-                  {iconMap[cat.icon]}
-                </div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 500, marginBottom: "12px", letterSpacing: "-0.01em", color: "var(--text)" }}>
-                  {cat.displayName}
-                </h3>
-                <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.6, fontWeight: 300, marginBottom: "16px" }}>
-                  {cat.description}
-                </p>
+        {/* Right - Bus Image */}
+        <div style={{ position: "relative", height: "100%", minHeight: "600px" }}>
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(to right, #0A0A0A 0%, transparent 40%)",
+            zIndex: 1,
+          }} />
+          <div style={{
+            position: "absolute", inset: 0,
+            background: "linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <div style={{ textAlign: "center", color: "rgba(255,255,255,0.15)" }}>
+              <Truck size={120} strokeWidth={0.5} />
+              <p style={{ fontSize: "14px", marginTop: "16px", letterSpacing: "0.1em" }}>BUS HERO IMAGE</p>
+            </div>
+          </div>
+
+          {/* Right side numbered list */}
+          <div style={{
+            position: "absolute", right: "48px", top: "50%", transform: "translateY(-50%)",
+            zIndex: 2, display: "flex", flexDirection: "column", gap: "24px",
+          }}>
+            {[
+              { num: "01", label: "Premium\nMaterials" },
+              { num: "02", label: "Engineered\nStrength" },
+              { num: "03", label: "Trusted by\nBuilders" },
+              { num: "04", label: "Across\nSouth India" },
+            ].map((item, i) => (
+              <div key={item.num} style={{
+                display: "flex", alignItems: "flex-start", gap: "12px",
+                opacity: i === 0 ? 1 : 0.5,
+              }}>
+                <span style={{ fontSize: "11px", fontWeight: 600, color: "#C9A96E", fontFamily: "monospace" }}>{item.num}</span>
+                <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.7)", lineHeight: 1.5, whiteSpace: "pre-line" }}>{item.label}</span>
               </div>
-              <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-                {cat.subcategories?.slice(0, 3).map((sub) => (
-                  <span
-                    key={sub}
-                    style={{
-                      border: "1px solid var(--border)",
-                      padding: "4px 12px",
-                      fontSize: "11px",
-                      fontFamily: "monospace",
-                      color: "var(--text-muted)",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {sub}
-                  </span>
-                ))}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== ACP DESIGNS PREVIEW ===== */}
-      <section
-        style={{ padding: "120px 64px", borderTop: "1px solid var(--border)", maxWidth: "1400px", margin: "0 auto" }}
-        className="section-responsive"
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: "80px", alignItems: "end" }} className="section-header-responsive">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)" }}>
-            ACP Design <strong style={{ fontWeight: 600 }}>Catalog</strong>
-          </h2>
-          <div style={{ justifySelf: "end" }}>
-            <Link
-              href="/acp-designs"
-              style={{
-                color: "var(--text)",
-                textDecoration: "none",
-                fontSize: "13px",
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                borderBottom: "1px solid var(--text)",
-                paddingBottom: "4px",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "4px",
-              }}
-            >
-              View All Designs <ArrowRight size={14} />
-            </Link>
+            ))}
           </div>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px" }} className="grid-4-responsive">
-          {featuredACP.map((design) => (
-            <Link
-              key={design.id}
-              href={`/acp-designs/${design.slug}`}
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-              }}
-            >
-              <div
-                style={{
-                  background: "var(--bg-alt)",
-                  height: "160px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "20px",
-                  border: "1px solid var(--border)",
-                }}
-              >
-                <Layers size={24} style={{ color: "var(--text-muted)" }} />
-              </div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "8px", color: "var(--text)" }}>
-                {design.designName}
-              </h3>
-              <p style={{ fontSize: "12px", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                {design.series}
-              </p>
-            </Link>
-          ))}
-        </div>
       </section>
 
-      {/* ===== VEHICLE PLYWOOD ===== */}
-      <section
-        style={{ padding: "120px 64px", borderTop: "1px solid var(--border)", maxWidth: "1400px", margin: "0 auto" }}
-        className="section-responsive"
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: "80px", alignItems: "end" }} className="section-header-responsive">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)" }}>
-            Vehicle-Specific <strong style={{ fontWeight: 600 }}>Plywood</strong>
-          </h2>
-          <div style={{ justifySelf: "end" }}>
-            <Link
-              href="/vehicle-plywood"
-              style={{
-                color: "var(--text)",
-                textDecoration: "none",
-                fontSize: "13px",
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.1em",
-                borderBottom: "1px solid var(--text)",
-                paddingBottom: "4px",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "4px",
-              }}
-            >
-              View All Vehicles <ArrowRight size={14} />
-            </Link>
-          </div>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px" }} className="grid-4-responsive">
-          {featuredVehicles.map((vehicle) => (
-            <Link
-              key={vehicle.id}
-              href={`/vehicle-plywood/${vehicle.slug}`}
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-                padding: "32px",
-                display: "flex",
-                flexDirection: "column",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-              }}
-            >
-              <div
-                style={{
-                  background: "var(--bg-alt)",
-                  height: "120px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "20px",
-                  border: "1px solid var(--border)",
-                }}
-              >
-                <Truck size={24} style={{ color: "var(--text-muted)" }} />
-              </div>
-              <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "8px", color: "var(--text)" }}>
-                {vehicle.vehicleName}
-              </h3>
-              <p style={{ fontSize: "12px", color: "var(--text-muted)", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-                {vehicle.vehicleBrand} &bull; {vehicle.thickness}
-              </p>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== SERVICE AREAS ===== */}
-      <section
-        style={{
-          padding: "120px 64px",
-          borderTop: "1px solid var(--border)",
-          maxWidth: "1400px",
-          margin: "0 auto",
-        }}
-        className="section-responsive"
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: "80px", alignItems: "end" }} className="section-header-responsive">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)" }}>
-            Supply Across <strong style={{ fontWeight: 600 }}>South India</strong>
-          </h2>
-          <p style={{ fontSize: "15px", color: "var(--text-muted)", lineHeight: 1.6, maxWidth: "440px", justifySelf: "end" }} className="section-desc-responsive">
-            Fast delivery to major bus body building hubs.
-          </p>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }} className="grid-responsive">
-          {majorCities.map((city) => (
-            <Link
-              key={city.slug}
-              href={`/${city.slug}/aluminium-extrusion`}
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-                padding: "32px",
-                textDecoration: "none",
-                transition: "all 0.3s ease",
-                display: "flex",
-                alignItems: "center",
-                gap: "16px",
-              }}
-            >
-              <MapPin size={20} style={{ color: "var(--accent)", flexShrink: 0 }} />
-              <div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "4px", color: "var(--text)" }}>
-                  {city.name}
-                </h3>
-                <p style={{ fontSize: "13px", color: "var(--text-muted)" }}>{city.state}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ===== WHY CHOOSE US ===== */}
-      <section
-        style={{ padding: "120px 64px", borderTop: "1px solid var(--border)", maxWidth: "1400px", margin: "0 auto" }}
-        className="section-responsive"
-      >
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", marginBottom: "80px", alignItems: "end" }} className="section-header-responsive">
-          <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)" }}>
-            Why Choose <strong style={{ fontWeight: 600 }}>A Karur Metal Co.?</strong>
-          </h2>
-          <p style={{ fontSize: "15px", color: "var(--text-muted)", lineHeight: 1.6, maxWidth: "440px", justifySelf: "end" }} className="section-desc-responsive">
-            Your trusted partner for bus body building materials since 2005.
-          </p>
-        </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "32px" }} className="grid-responsive">
+      {/* ===== FEATURES STRIP ===== */}
+      <section style={{
+        background: "#0A0A0A",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+        padding: "48px 48px",
+      }}>
+        <div style={{
+          maxWidth: "1400px", margin: "0 auto",
+          display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px",
+        }} className="features-responsive">
           {[
-            { title: "Wholesale Pricing", desc: "Direct from manufacturer pricing with volume discounts for bulk orders" },
-            { title: "Pan India Delivery", desc: "Fast delivery across Tamil Nadu, Kerala, Karnataka, and all major states" },
-            { title: "AIS-052 Compliant", desc: "All materials meet Automotive Industry Standard 052 for bus body construction" },
-            { title: "Technical Support", desc: "Expert guidance on material selection, specifications, and application" },
-            { title: "Custom Cutting", desc: "Precision CNC cutting and fabrication services for custom requirements" },
-            { title: "Credit Facilities", desc: "Flexible payment terms and credit facilities for established customers" },
-          ].map((item) => (
-            <div
-              key={item.title}
-              style={{
-                background: "var(--card-bg)",
-                border: "1px solid var(--border)",
-                padding: "48px",
-                display: "flex",
-                gap: "16px",
-                transition: "all 0.3s ease",
-              }}
-            >
-              <CheckCircle2 size={24} style={{ color: "var(--accent)", flexShrink: 0, marginTop: "2px" }} />
+            { icon: <Shield size={28} />, title: "PREMIUM QUALITY", desc: "International standards\nyou can trust" },
+            { icon: <Layers size={28} />, title: "WIDE RANGE", desc: "1000+ materials for\nevery need" },
+            { icon: <Truck size={28} />, title: "FAST DELIVERY", desc: "On-time. Every time.\nAcross South India" },
+            { icon: <Headphones size={28} />, title: "EXPERT SUPPORT", desc: "Right guidance for\nyour business" },
+          ].map((feature) => (
+            <div key={feature.title} style={{ display: "flex", gap: "16px", alignItems: "flex-start" }}>
+              <div style={{ color: "#C9A96E", flexShrink: 0, marginTop: "2px" }}>{feature.icon}</div>
               <div>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 500, marginBottom: "8px", color: "var(--text)" }}>
-                  {item.title}
-                </h3>
-                <p style={{ fontSize: "14px", color: "var(--text-muted)", lineHeight: 1.6, fontWeight: 300 }}>
-                  {item.desc}
-                </p>
+                <h3 style={{ fontSize: "12px", fontWeight: 600, letterSpacing: "0.1em", color: "#fff", marginBottom: "6px" }}>{feature.title}</h3>
+                <p style={{ fontSize: "12px", lineHeight: 1.6, color: "rgba(255,255,255,0.45)", whiteSpace: "pre-line" }}>{feature.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ===== CTA SECTION ===== */}
-      <section
-        style={{
-          padding: "120px 64px",
-          borderTop: "1px solid var(--border)",
-          maxWidth: "1400px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-        className="section-responsive"
-      >
-        <h2 style={{ fontFamily: "var(--font-display)", fontSize: "38px", fontWeight: 300, letterSpacing: "-0.02em", color: "var(--text)", marginBottom: "24px" }}>
-          Need a Quote for Your Bus Body Project?
-        </h2>
-        <p style={{ fontSize: "15px", color: "var(--text-muted)", lineHeight: 1.6, maxWidth: "600px", margin: "0 auto 40px" }}>
-          Get wholesale pricing on aluminium extrusions, ACP sheets, plywood, paints, sealants, and hardware.
-        </p>
-        <div style={{ display: "flex", gap: "16px", justifyContent: "center", flexWrap: "wrap" }}>
-          <Link
-            href="/quote"
-            style={{
-              background: "var(--btn-bg)",
-              color: "var(--btn-text)",
-              padding: "18px 40px",
-              fontSize: "13px",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              textDecoration: "none",
-              transition: "opacity 0.3s",
-              display: "inline-block",
+      {/* ===== OUR MATERIALS ===== */}
+      <section style={{ padding: "100px 48px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: "48px" }} className="materials-header-responsive">
+          <div>
+            <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", color: "#C9A96E", textTransform: "uppercase", marginBottom: "16px" }}>OUR MATERIALS</div>
+            <h2 style={{ fontSize: "clamp(32px, 4vw, 48px)", fontWeight: 300, lineHeight: 1.15, color: "#fff" }}>
+              Premium Materials.<br />
+              <span style={{ fontWeight: 500 }}>Built for Every Journey.</span>
+            </h2>
+          </div>
+          <div style={{ maxWidth: "320px", textAlign: "right" }} className="materials-desc-responsive">
+            <p style={{ fontSize: "14px", lineHeight: 1.6, color: "rgba(255,255,255,0.5)", marginBottom: "16px" }}>
+              From interiors to exteriors, we provide high performance materials that deliver durability, safety and beauty.
+            </p>
+            <Link href="/products" style={{ color: "#C9A96E", textDecoration: "none", fontSize: "13px", fontWeight: 500, display: "inline-flex", alignItems: "center", gap: "6px" }}>
+              View all products <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "16px" }} className="materials-grid-responsive">
+          {[
+            { title: "Designer ACP", desc: "Premium finishes.\nEndless possibilities.", img: "acp" },
+            { title: "Aluminium Extrusions", desc: "Precision engineered.\nPerfectly crafted.", img: "extrusion" },
+            { title: "Chequered Plywood", desc: "Strong. Reliable.\nBuilt to carry more.", img: "plywood" },
+            { title: "Paints & Coatings", desc: "Long lasting finish.\nProtection that stays.", img: "paint" },
+            { title: "Hardware & Others", desc: "Small parts.\nBig impact.", img: "hardware" },
+          ].map((item) => (
+            <div key={item.title} style={{
+              background: "#141414", borderRadius: "12px", overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.06)",
+              transition: "all 0.3s", cursor: "pointer",
             }}
-          >
-            Request Wholesale Quote
-          </Link>
-          <a
-            href={generateWhatsAppLink("I need a wholesale quote for bus body materials. Please contact me.")}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              background: "#25D366",
-              color: "#fff",
-              padding: "18px 40px",
-              fontSize: "13px",
-              fontWeight: 600,
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
-              textDecoration: "none",
-              transition: "opacity 0.3s",
-              display: "inline-block",
-            }}
-          >
-            WhatsApp Enquiry
-          </a>
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "rgba(201,169,110,0.3)"; e.currentTarget.style.transform = "translateY(-4px)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)"; e.currentTarget.style.transform = "translateY(0)"; }}
+            >
+              <div style={{
+                height: "200px", background: "#1a1a1a",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                borderBottom: "1px solid rgba(255,255,255,0.06)",
+              }}>
+                <div style={{ color: "rgba(255,255,255,0.1)" }}>
+                  <Layers size={48} />
+                </div>
+              </div>
+              <div style={{ padding: "20px" }}>
+                <h3 style={{ fontSize: "15px", fontWeight: 600, color: "#fff", marginBottom: "8px" }}>{item.title}</h3>
+                <p style={{ fontSize: "12px", lineHeight: 1.6, color: "rgba(255,255,255,0.45)", whiteSpace: "pre-line", marginBottom: "16px" }}>{item.desc}</p>
+                <div style={{
+                  width: "32px", height: "32px", borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.15)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                  color: "#C9A96E", transition: "all 0.3s", cursor: "pointer",
+                }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = "#C9A96E"; e.currentTarget.style.color = "#0A0A0A"; e.currentTarget.style.borderColor = "#C9A96E"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = "#C9A96E"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)"; }}
+                >
+                  <ArrowRight size={14} />
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
+
+      {/* ===== BRANDS ===== */}
+      <section style={{
+        padding: "60px 48px", maxWidth: "1400px", margin: "0 auto",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        borderBottom: "1px solid rgba(255,255,255,0.06)",
+      }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "32px" }}>
+          <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", color: "#C9A96E", textTransform: "uppercase" }}>TOP BRANDS WE DEAL IN</div>
+          <Link href="/brands" style={{ color: "rgba(255,255,255,0.5)", textDecoration: "none", fontSize: "13px", display: "flex", alignItems: "center", gap: "6px" }}>
+            View all brands <ArrowRight size={14} />
+          </Link>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "32px", flexWrap: "wrap" }} className="brands-responsive">
+          {["Aludecor", "JINDAL ALUMINIUM", "Magnus", "FEVICOL", "asianpaints", "3M", "WÜRTH"].map((brand) => (
+            <div key={brand} style={{
+              fontSize: brand === "JINDAL ALUMINIUM" ? "11px" : "16px",
+              fontWeight: brand === "JINDAL ALUMINIUM" ? 700 : 600,
+              color: "rgba(255,255,255,0.35)", letterSpacing: "0.05em",
+              transition: "color 0.3s", cursor: "pointer",
+            }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.7)")}
+              onMouseLeave={(e) => (e.currentTarget.style.color = "rgba(255,255,255,0.35)")}
+            >
+              {brand}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== WHY BUILDERS CHOOSE AKMC ===== */}
+      <section style={{ padding: "80px 48px", maxWidth: "1400px", margin: "0 auto" }}>
+        <div style={{ fontSize: "11px", fontWeight: 600, letterSpacing: "0.15em", color: "#C9A96E", textTransform: "uppercase", marginBottom: "40px" }}>
+          WHY BUILDERS CHOOSE AKMC
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "32px" }} className="features-responsive">
+          {[
+            { icon: <Shield size={24} />, title: "Premium Quality", desc: "International standards\nyou can trust" },
+            { icon: <Layers size={24} />, title: "Wide Range", desc: "1000+ materials for\nevery need" },
+            { icon: <Truck size={24} />, title: "Timely Delivery", desc: "On-time. Every time.\nAcross South India" },
+            { icon: <Headphones size={24} />, title: "Expert Support", desc: "Right guidance for\nyour business" },
+          ].map((item) => (
+            <div key={item.title} style={{ display: "flex", gap: "14px", alignItems: "flex-start" }}>
+              <div style={{ color: "#C9A96E", flexShrink: 0 }}>{item.icon}</div>
+              <div>
+                <h3 style={{ fontSize: "14px", fontWeight: 600, color: "#fff", marginBottom: "6px" }}>{item.title}</h3>
+                <p style={{ fontSize: "12px", lineHeight: 1.6, color: "rgba(255,255,255,0.45)", whiteSpace: "pre-line" }}>{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== RESPONSIVE STYLES ===== */}
+      <style>{`
+        @media (max-width: 1024px) {
+          .hero-responsive { grid-template-columns: 1fr !important; }
+          .features-responsive { grid-template-columns: repeat(2, 1fr) !important; }
+          .materials-grid-responsive { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+          .features-responsive { grid-template-columns: 1fr !important; }
+          .materials-grid-responsive { grid-template-columns: repeat(2, 1fr) !important; }
+          .materials-header-responsive { flex-direction: column !important; align-items: flex-start !important; gap: 20px; }
+          .materials-desc-responsive { text-align: left !important; max-width: 100% !important; }
+          .brands-responsive { justify-content: center !important; }
+        }
+        @media (max-width: 480px) {
+          .materials-grid-responsive { grid-template-columns: 1fr !important; }
+        }
+        @keyframes scrollBounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(12px); }
+        }
+      `}</style>
     </div>
   );
 }
