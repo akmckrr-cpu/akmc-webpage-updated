@@ -746,7 +746,7 @@ export default function HomePage() {
           </h2>
           <div style={{ justifySelf: "end" }}>
             <Link
-              href="/acpDesigns"
+              href="/acp-designs"
               style={{
                 color: "var(--text)",
                 textDecoration: "none",
@@ -769,7 +769,7 @@ export default function HomePage() {
           {featuredACP.map((design) => (
             <Link
               key={design.slug}
-              href={`/acpDesigns/${design.slug}`}
+              href={`/acp-designs/${design.slug}`}
               style={{
                 background: "var(--card-bg)",
                 border: "1px solid var(--border)",
@@ -853,7 +853,7 @@ export default function HomePage() {
           </h2>
           <div style={{ justifySelf: "end" }}>
             <Link
-              href="/vehiclePlywood"
+              href="/vehicle-plywood"
               style={{
                 color: "var(--text)",
                 textDecoration: "none",
@@ -876,7 +876,7 @@ export default function HomePage() {
           {featuredVehicles.map((vehicle) => (
             <Link
               key={vehicle.slug}
-              href={`/vehiclePlywood/${vehicle.slug}`}
+              href={`/vehicle-plywood/${vehicle.slug}`}
               style={{
                 background: "var(--card-bg)",
                 border: "1px solid var(--border)",
@@ -1064,54 +1064,6 @@ export default function HomePage() {
           Request a Quote
         </Link>
       </section>
-
-      <style jsx>{`
-        @media (max-width: 992px) {
-          .hero-responsive {
-            grid-template-columns: 1fr !important;
-            gap: 48px !important;
-            padding: 100px 24px 64px 24px !important;
-          }
-          .section-responsive {
-            padding: 80px 24px !important;
-          }
-          .section-header-responsive {
-            grid-template-columns: 1fr !important;
-            gap: 16px !important;
-          }
-          .section-desc-responsive {
-            justify-self: start !important;
-          }
-          .grid-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .grid-4-responsive {
-            grid-template-columns: repeat(2, 1fr) !important;
-          }
-          .stats-responsive {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 32px !important;
-          }
-          .showcase-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .showcase-visual-responsive {
-            border-right: none !important;
-            border-bottom: 1px solid var(--border) !important;
-          }
-          .showcase-details-responsive {
-            padding: 32px 24px !important;
-          }
-        }
-        @media (max-width: 640px) {
-          .grid-4-responsive {
-            grid-template-columns: 1fr !important;
-          }
-          .stats-responsive {
-            grid-template-columns: 1fr !important;
-          }
-        }
-      `}</style>
-    </>
+</>
   );
 }
